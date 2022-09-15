@@ -5,6 +5,7 @@ import cookie from 'cookie'
 import jwt from 'jsonwebtoken'
 
 import prisma from '../../lib/prisma'
+import { SECRET_KEY } from '../../constants'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body
@@ -22,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         email: user.email,
         time: Date.now(),
       },
-      'superSecret@123',
+      SECRET_KEY,
       {
         expiresIn: '8h',
       }

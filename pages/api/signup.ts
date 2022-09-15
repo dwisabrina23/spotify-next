@@ -5,6 +5,7 @@ import cookie from 'cookie'
 import jwt from 'jsonwebtoken'
 
 import prisma from '../../lib/prisma'
+import { SECRET_KEY } from '../../constants'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync()
@@ -34,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id: user.id,
       time: Date.now(),
     },
-    'superSecret@123',
+    SECRET_KEY,
     {
       expiresIn: '8h',
     }
